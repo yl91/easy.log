@@ -1,0 +1,9 @@
+01Easy.Log/bin/
+01Easy.Log/obj/
+04Easy.Log.Infrastructure/bin/
+Easy.Log.Test/obj/
+04Easy.Log.Infrastructure/obj/
+Easy.Log.Test/bin/
+03Easy.Log.Model/obj/
+02Easy.Log.Application/obj/
+03Easy.Log.Model/bin/

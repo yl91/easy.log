@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DBUpgrade>
+    <Settings>
+        <SettingSql>
+            INSERT INTO db_version(from_version,current_version,last_update_datetime) VALUES({0},{1},now());
+        </SettingSql>
+    </Settings>
+	
+     <UpgradeSql version="2">
+        <Author>杨力</Author>
+        <Memo>
+            初始化数据库
+        </Memo>
+        <Sql ref="create.sql" />
+    </UpgradeSql>
+	
+ </DBUpgrade>
