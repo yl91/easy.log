@@ -12,7 +12,7 @@ namespace Easy.Log.Model.Log
     /// </summary>
     public class Log:EntityBase<int>
     {
-
+        public Log() { }
         public Log(string tag,string message,LogLevel logLevel,AppInfo appInfo,string ip)
         {
             this.Tag = tag;

@@ -12,6 +12,7 @@ namespace Easy.Log.Model.App
     /// </summary>
     public class App : EntityBase<int>
     {
+        public App() { }
         public App(string name,string description,int userId,string ip)
         {
             this.Name = name;

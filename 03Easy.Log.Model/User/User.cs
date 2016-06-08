@@ -9,12 +9,13 @@ namespace Easy.Log.Model.User
 {
     public class User : EntityBase<int>
     {
-
-        public User(string userName,string realName,string password)
+        public User()
         {
-            this.UserName = UserName;
-            this.RealName = realName;
-            this.Password = password;
+        }
+
+        public User(string userName)
+        {
+            this.UserName = userName;
             this.CreateDate = DateTime.Now;
         }
 
@@ -33,7 +34,7 @@ namespace Easy.Log.Model.User
         public string RealName
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace Easy.Log.Model.User
         public string Password
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>

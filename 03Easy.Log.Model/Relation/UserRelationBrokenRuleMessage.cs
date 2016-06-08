@@ -12,7 +12,7 @@ namespace Easy.Log.Model.Relation
         
         protected override void PopulateMessage()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

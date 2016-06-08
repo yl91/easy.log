@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<repositories xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.39541240.com/repository">
+  <repository interface="Easy.Log.Model.User.IUserRepository,Easy.Log.Model"
+              implementation="Easy.Log.Infrastructure.Repository.User.UserRepository,Easy.Log.Infrastructure"/>
+
+
+  <repository interface="Easy.Log.Model.Relation.IUserRelationRepository,Easy.Log.Model"
+            implementation="Easy.Log.Infrastructure.Repository.Relation.UserRelationRepository,Easy.Log.Infrastructure"/>
+
+  <repository interface="Easy.Log.Model.App.IAppRepository,Easy.Log.Model"
+            implementation="Easy.Log.Infrastructure.Repository.App.AppRepository,Easy.Log.Infrastructure"/>
+
+  <repository interface="Easy.Log.Model.Log.ILogRepository,Easy.Log.Model"
+            implementation="Easy.Log.Infrastructure.Repository.Log.LogRepository,Easy.Log.Infrastructure"/>
+  
+  
+  
+</repositories>

@@ -51,23 +51,26 @@
     <Compile Include="App\AppBrokenRuleMessage.cs" />
     <Compile Include="App\AppStatus.cs" />
     <Compile Include="App\AppValidate.cs" />
+    <Compile Include="App\IAppRepository.cs" />
     <Compile Include="App\LogOuput.cs" />
     <Compile Include="Log\AppInfo.cs" />
+    <Compile Include="Log\ILogRepository.cs" />
     <Compile Include="Log\Log.cs" />
     <Compile Include="Log\LogBrokenRuleMessage.cs" />
     <Compile Include="Log\LogLevel.cs" />
     <Compile Include="Log\LogValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App\App.cs" />
+    <Compile Include="Relation\IUserRelationRepository.cs" />
     <Compile Include="Relation\UserRelationBrokenRuleMessage.cs" />
     <Compile Include="Relation\UserRelation.cs" />
     <Compile Include="Relation\UserRelationValidate.cs" />
+    <Compile Include="RepositoryRegistry.cs" />
     <Compile Include="User\IUserRepository.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserBrokenRuleMessage.cs" />
     <Compile Include="User\UserValidate.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

@@ -12,6 +12,10 @@ namespace Easy.Log.Model.Relation
     /// </summary>
     public class UserRelation : EntityBase<int>
     {
+        public UserRelation()
+        {
+        }
+
         public UserRelation(int userId,int inviteUserId,int appId)
         {
             this.UserId = userId;
@@ -67,12 +71,12 @@ namespace Easy.Log.Model.Relation
 
         public override bool Validate()
         {
-            throw new NotImplementedException();
+            return new UserRelationValidate().IsSatisfy(this);
         }
 
         protected override BrokenRuleMessage GetBrokenRuleMessages()
         {
-            throw new NotImplementedException();
+            return new UserRelationBrokenRuleMessage();
         }
     }
 }

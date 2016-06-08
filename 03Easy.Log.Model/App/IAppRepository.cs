@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Easy.Domain.RepositoryFramework;
 
-namespace _02Easy.Log.Application
+namespace Easy.Log.Model.App
 {
-    public class Class1
+    public interface IAppRepository: IRepository<App, int>
     {
+
     }
 }

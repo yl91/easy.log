@@ -66,15 +66,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\App\AppRepository.cs" />
+    <Compile Include="Repository\App\AppSql.cs" />
     <Compile Include="Repository\Database.cs" />
+    <Compile Include="Repository\Log\LogRepository.cs" />
+    <Compile Include="Repository\Log\LogSql.cs" />
+    <Compile Include="Repository\Relation\UserRelationRepository.cs" />
+    <Compile Include="Repository\Relation\UserRelationSql.cs" />
     <Compile Include="Repository\User\UserRepository.cs" />
     <Compile Include="Repository\User\UserSql.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\App\" />
-    <Folder Include="Repository\Log\" />
-    <Folder Include="Repository\Relation\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\03Easy.Log.Model\03Easy.Log.Model.csproj">
       <Project>{0bbf2342-b411-437b-aa24-bf654d782115}</Project>
@@ -84,6 +86,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Repository\repository.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
