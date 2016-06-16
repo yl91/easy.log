@@ -9,6 +9,6 @@ namespace Easy.Log.Model.Relation
 {
     public interface IUserRelationRepository: IRepository<UserRelation, int>
     {
-
+        UserRelation FindBy(int userId,int inviteUserId);
     }
 }

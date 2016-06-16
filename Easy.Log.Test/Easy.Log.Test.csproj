@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\App\AppApplicationTest.cs" />
+    <Compile Include="Application\Relation\RelationApplicationTest.cs" />
+    <Compile Include="Application\User\UserApplicationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\App\AppRepositoryTest.cs" />
     <Compile Include="Repository\Log\LogRepositoryTest.cs" />
@@ -68,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\02Easy.Log.Application\02Easy.Log.Application.csproj">
+      <Project>{6a07a423-f44c-44c2-97bb-f4347be9e64d}</Project>
+      <Name>02Easy.Log.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\03Easy.Log.Model\03Easy.Log.Model.csproj">
       <Project>{0bbf2342-b411-437b-aa24-bf654d782115}</Project>
       <Name>03Easy.Log.Model</Name>
@@ -77,7 +84,9 @@
       <Name>04Easy.Log.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Application\Log\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>

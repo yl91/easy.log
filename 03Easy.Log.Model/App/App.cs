@@ -19,6 +19,7 @@ namespace Easy.Log.Model.App
             this.Description = description;
             this.UserId = userId;
             this.IsRecord = true;
+            this.Ip = ip;
             this.CreateDate = DateTime.Now;
         } 
 
@@ -40,7 +41,6 @@ namespace Easy.Log.Model.App
             private set;
         }
 
-
         /// <summary>
         /// 用户ID
         /// </summary>
@@ -49,8 +49,6 @@ namespace Easy.Log.Model.App
             get;
             private set;
         }
-
-       
 
         /// <summary>
         /// 是否记录
@@ -70,6 +68,11 @@ namespace Easy.Log.Model.App
             private set;
         }
 
+        public string Ip
+        {
+            get;
+            private set;
+        }
 
         public override bool Validate()
         {
