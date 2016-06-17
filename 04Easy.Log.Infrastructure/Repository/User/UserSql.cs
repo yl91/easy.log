@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Easy.Public;
+using Easy.Public.MyLog;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using M=Easy.Log.Model.User;
+using M = Easy.Log.Model.User;
 
 namespace Easy.Log.Infrastructure.Repository.User
 {
@@ -13,6 +16,24 @@ namespace Easy.Log.Infrastructure.Repository.User
         {
             return @"select id,username,realname,password,createdate from log_user";
         }
+
+        public static Tuple<string, string, dynamic> Select(M.UserQuery query)
+        {
+            string whereSql = QuerySql(query);
+            string countSql = string.Format("select count(id) as Count from log_user {0}; ",whereSql);
+            string orderbySql = " order by createdate desc ";
+
+            string selectsql = string.Join(" ", BaseSelectSql(), whereSql, orderbySql, "limit @limit offset @offset;");
+            LogManager.Info("Select", JsonConvert.SerializeObject(query));
+
+            return new Tuple<string, string, dynamic>(countSql, selectsql, new
+            {
+                limit=query.Limit,
+                offset=query.Offset,
+                CreateDate = query.CreateDate
+            });
+        }
+
 
         public static string FindAll()
         {
@@ -68,5 +89,19 @@ namespace Easy.Log.Infrastructure.Repository.User
             });
         }
 
+        public static Tuple<string,dynamic> FindByName(string username)
+        {
+             string sql = string.Join(" ", BaseSelectSql(), "where", "username=@UserName");
+            return new Tuple<string, dynamic>(sql, new { UserName=username });
+        }
+
+        private static String QuerySql(M.UserQuery query)
+        {
+            var build = new SQLBuilder();
+            build.AppendWhere();
+            build.Append(!string.IsNullOrEmpty(query.Name), "and", $"username like '%{query.Name}%'");
+            build.Append(query.CreateDate != null, "and", "createdate>=@CreateDate");
+            return build.Sql();
+        }
     }
 }

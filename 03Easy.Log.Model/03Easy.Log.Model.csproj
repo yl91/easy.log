@@ -69,6 +69,7 @@
     <Compile Include="User\IUserRepository.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserBrokenRuleMessage.cs" />
+    <Compile Include="User\UserQuery.cs" />
     <Compile Include="User\UserValidate.cs" />
   </ItemGroup>
   <ItemGroup>

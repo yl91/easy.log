@@ -61,6 +61,13 @@ namespace Easy.Log.Test.Repository.User
             RepositoryRegistry.User.Update(model);
         }
 
+        [Test]
+        public void FindByNameTest()
+        {
+            var user= RepositoryRegistry.User.FindBy("abc");
+        }
+
+
         [TearDown]
         public void Clear()
         {

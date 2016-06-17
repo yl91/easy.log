@@ -31,6 +31,27 @@ namespace Easy.Log.Infrastructure.Repository.User
             }
         }
 
+        public IList<M.User> Select(M.UserQuery query,out int totalRows)
+        {
+            if (query.PageIndex<=0)
+            {
+                query.PageIndex = 1;
+            }
+            if (query.PageSize<=0||query.PageSize>1000)
+            {
+                query.PageSize = 1000;
+            }
+            using (var conn=Database.Open())
+            {
+                var tuple= UserSql.Select(query);
+                SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
+
+                var result = reader.Read<object>().First() as IDictionary<string, object>;
+                totalRows = Convert.ToInt32(result["Count"]);
+                return reader.Read<M.User>().ToList();
+            }
+        }
+
         public M.User FindBy(int key)
         {
             using (var conn=Database.Open())
@@ -62,6 +83,15 @@ namespace Easy.Log.Infrastructure.Repository.User
             {
                 var tuple = UserSql.Update(item);
                 conn.ExecuteScalar(tuple.Item1, (object) tuple.Item2);
+            }
+        }
+
+        public Model.User.User FindBy(string username)
+        {
+            using (var conn = Database.Open())
+            {
+                var tuple = UserSql.FindByName(username);
+                return conn.Query<Model.User.User>(tuple.Item1, (object)tuple.Item2).FirstOrDefault();
             }
         }
     }

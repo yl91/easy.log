@@ -73,6 +73,7 @@
     <Compile Include="Repository\Log\LogSql.cs" />
     <Compile Include="Repository\Relation\UserRelationRepository.cs" />
     <Compile Include="Repository\Relation\UserRelationSql.cs" />
+    <Compile Include="Repository\User\UserQuery.cs" />
     <Compile Include="Repository\User\UserRepository.cs" />
     <Compile Include="Repository\User\UserSql.cs" />
   </ItemGroup>

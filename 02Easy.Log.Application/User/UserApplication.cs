@@ -13,9 +13,46 @@ namespace Easy.Log.Application.User
 {
     public class UserApplication: BaseApplication
     {
+        public PageList<UserModel> Select(UserQuery query)
+        {
+            int totalRows = 0;
+            IList<M.User> list= RepositoryRegistry.User.Select(new Model.User.UserQuery{
+                PageIndex =query.PageIndex,
+                PageSize =query.PageSize,
+                Name =query.Name,
+                CreateDate =query.CreateDate
+            },out totalRows);
+            PageList<UserModel> pageList = new PageList<UserModel>();
+            pageList.Collections = list.Select(m => new UserModel() {
+                Id = m.Id,
+                UserName = m.UserName,
+                RealName = m.RealName,
+                CreateDate = m.CreateDate,
+                Password = m.Password
+            }).ToList();
+            pageList.TotalRows = totalRows;
+            return pageList;
+        }
+
+        /// <summary>
+        /// 用户登陆
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        public Tuple<int, string> Login(string userName,string password)
+        {
+            UserDescriptor user= new UserAuthenticationService().Authenticate(userName, password);
+            if (user == null)
+            {
+                return null;
+            }
+            return new Tuple<int, string>(user.Id, user.Name);
+        }
 
         public string Create(string username,string password,string realname)
         {
+            password= new PasswordService().Encrypt(password);
             M.User user = new M.User(username) { Password=password,RealName=realname};
             if (user.Validate())
             {
@@ -65,7 +102,6 @@ namespace Easy.Log.Application.User
             }).ToList();
             return new Return() { DataBody=listmodel };
         }
-
 
     }
 }

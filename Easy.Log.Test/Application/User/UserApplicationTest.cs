@@ -33,6 +33,13 @@ namespace Easy.Log.Test.Application.User
         }
 
         [Test]
+        public void LoginTest()
+        {
+            var tuple= ApplicationRegistry.User.Login("abc", "123");
+
+        }
+
+        [Test]
         public void FindAllTest()
         {
             var list= ApplicationRegistry.User.FindAll();
@@ -40,7 +47,7 @@ namespace Easy.Log.Test.Application.User
 
         public M.User Create()
         {
-            return new M.User("zs") { RealName="张三", Password="123456" };
+            return new M.User("test") { RealName="张三", Password="123456" };
         }
     }
 }

@@ -38,6 +38,14 @@
       <HintPath>..\packages\Easy.Domain.2.0.2.0\lib\net451\Easy.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Easy.Public, Version=1.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Easy.Public.1.0.2.4\lib\net451\Easy.Public.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,11 +62,16 @@
     <Compile Include="Models\App\AppModel.cs" />
     <Compile Include="Models\Log\LogLevel.cs" />
     <Compile Include="Models\Log\LogParameter.cs" />
+    <Compile Include="Models\PageList.cs" />
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\User\UserModel.cs" />
+    <Compile Include="Models\User\UserQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relation\RelationApplication.cs" />
+    <Compile Include="User\PasswordService.cs" />
     <Compile Include="User\UserApplication.cs" />
+    <Compile Include="User\UserAuthenticationService.cs" />
+    <Compile Include="User\UserDescriptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
