@@ -13,6 +13,29 @@ namespace Easy.Log.Infrastructure.Repository.Log
     {
         private static readonly Easy.Public.EntityPropertyHelper<M.Log> helper = new Public.EntityPropertyHelper<M.Log>();
 
+        public IList<M.Log> Select(M.LogQuery query,out int totalRows)
+        {
+            if (query.PageIndex <= 0)
+            {
+                query.PageIndex = 1;
+            }
+            if (query.PageSize <= 0 || query.PageSize > 1000)
+            {
+                query.PageSize = 1000;
+            }
+            using (var conn = Database.Open())
+            {
+                var tuple = LogSql.Select(query);
+                SqlMapper.GridReader reader = conn.QueryMultiple(tuple.Item1 + tuple.Item2, (object)tuple.Item3);
+
+                var result = reader.Read<object>().First() as IDictionary<string, object>;
+                totalRows = Convert.ToInt32(result["Count"]);
+
+                return reader.Read<M.Log, M.AppInfo, M.Log>(SelectConvert, splitOn: "split").ToList();
+
+
+            }
+        }
 
         private M.Log SelectConvert(M.Log log, M.AppInfo info)
         {

@@ -13,9 +13,10 @@ namespace Easy.Log.Model.User
         {
         }
 
-        public User(string userName)
+        public User(string userName,string email)
         {
             this.UserName = userName;
+            this.Email = email;
             this.CreateDate = DateTime.Now;
         }
 
@@ -52,6 +53,12 @@ namespace Easy.Log.Model.User
         public DateTime CreateDate
         {
             get; private set;
+        }
+
+        public string Email
+        {
+            get;
+            private set;
         }
 
 

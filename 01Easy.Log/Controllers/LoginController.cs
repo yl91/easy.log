@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Easy.Public.MvcSecurity;
 using Castle.Core.Internal;
 using Easy.Log.Application;
+using Easy.Log.Application.User;
 
 namespace Easy.Log.Controllers
 {
@@ -38,5 +39,23 @@ namespace Easy.Log.Controllers
             AuthenticateHelper.DestroyTicket();
             return Redirect("/login/index");
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegisterPost(string userName, string password, string realName, string email)
+        {
+            string msg = ApplicationRegistry.User.Create(userName, password, realName, email);
+            if (string.IsNullOrEmpty(msg))
+            {
+                AuthenticateHelper.SetTicket(userName, null, 0, realName);
+                return Redirect("/Home/Index");
+            }
+            return Json("no");
+        }
+
     }
 }

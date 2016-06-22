@@ -74,6 +74,7 @@ namespace Easy.Log.Model.Log
             private set;
         }
 
+
         public override bool Validate()
         {
             return new LogValidate().IsSatisfy(this);

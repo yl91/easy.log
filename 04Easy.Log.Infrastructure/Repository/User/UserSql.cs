@@ -14,7 +14,7 @@ namespace Easy.Log.Infrastructure.Repository.User
     {
         private static string BaseSelectSql()
         {
-            return @"select id,username,realname,password,createdate from log_user";
+            return @"select id,username,realname,password,email,createdate from log_user";
         }
 
         public static Tuple<string, string, dynamic> Select(M.UserQuery query)
@@ -43,15 +43,16 @@ namespace Easy.Log.Infrastructure.Repository.User
         public static Tuple<string, dynamic> Add(M.User user)
         {
             const string sql = @"INSERT INTO log_user
-	                            (username, realname, password, createdate)
-	                            VALUES (@UserName,@RealName, @Password, @CreateDate);select last_insert_id()";
+	                            (username, realname, password, createdate,email)
+	                            VALUES (@UserName,@RealName, @Password, @CreateDate,@Email);select last_insert_id()";
 
-            return new Tuple<string, dynamic>(sql,new
+            return new Tuple<string, dynamic>(sql, new
             {
-                UserName=user.UserName,
-                RealName=user.RealName,
-                Password=user.Password,
-                CreateDate=user.CreateDate
+                UserName = user.UserName,
+                RealName = user.RealName,
+                Password = user.Password,
+                CreateDate = user.CreateDate,
+                Email = user.Email
             });
         }
 
@@ -77,7 +78,8 @@ namespace Easy.Log.Infrastructure.Repository.User
 	                            SET
 		                            username=@UserName,
 		                            realname=@RealName,
-		                            password=@Password
+		                            password=@Password,
+                                    email=@Email
 	                            WHERE id=@Id";
 
             return new Tuple<string, dynamic>(sql,new

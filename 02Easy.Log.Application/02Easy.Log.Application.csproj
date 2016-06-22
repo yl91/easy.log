@@ -61,7 +61,9 @@
     <Compile Include="Log\LogApplication.cs" />
     <Compile Include="Models\App\AppModel.cs" />
     <Compile Include="Models\Log\LogLevel.cs" />
+    <Compile Include="Models\Log\LogModel.cs" />
     <Compile Include="Models\Log\LogParameter.cs" />
+    <Compile Include="Models\Log\LogQuery.cs" />
     <Compile Include="Models\PageList.cs" />
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\User\UserModel.cs" />

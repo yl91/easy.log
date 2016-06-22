@@ -11,7 +11,7 @@ namespace Easy.Log.Infrastructure.Repository.App
     {
         private static string BaseSelectSql()
         {
-            return @"SELECT id,name, description, userid, isrecord, createdate FROM log_app";
+            return @"SELECT id,name, description, userid, isrecord, createdate,ip FROM log_app";
         }
 
 
@@ -24,8 +24,8 @@ namespace Easy.Log.Infrastructure.Repository.App
         public static Tuple<string, dynamic> Add(M.App app)
         {
             const string sql = @"INSERT INTO log_app
-	                            (name, description, userid, isrecord, createdate)
-	                            VALUES (@Name, @Description, @UserId, @Isrecord, @CreateDate);select last_insert_id()";
+	                            (name, description, userid, isrecord, createdate,ip)
+	                            VALUES (@Name, @Description, @UserId, @Isrecord, @CreateDate,@Ip);select last_insert_id()";
 
             return new Tuple<string, dynamic>(sql, new
             {
@@ -33,7 +33,8 @@ namespace Easy.Log.Infrastructure.Repository.App
                 Description=app.Description,
                 UserId=app.UserId,
                 Isrecord=app.IsRecord,
-                CreateDate=app.CreateDate
+                CreateDate=app.CreateDate,
+                Ip=app.Ip
             });
         }
 
@@ -61,7 +62,8 @@ namespace Easy.Log.Infrastructure.Repository.App
 		                            description=@Description,
 		                            userid=@UserId,
 		                            isrecord=@IsRecord,
-		                            createdate=@CreateDate
+		                            createdate=@CreateDate,
+                                    ip=@Ip
 	                            WHERE id=@Id";
 
             return new Tuple<string, dynamic>(sql, new
@@ -71,7 +73,8 @@ namespace Easy.Log.Infrastructure.Repository.App
                 Description=app.Description,
                 UserId=app.UserId,
                 IsRecord=app.IsRecord,
-                CreateDate=app.CreateDate
+                CreateDate=app.CreateDate,
+                Ip=app.Ip
             });
         }
     }

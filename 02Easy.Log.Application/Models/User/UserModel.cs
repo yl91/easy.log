@@ -13,5 +13,6 @@ namespace Easy.Log.Application.Models.User
         public string RealName;
         public string Password;
         public DateTime CreateDate;
+        public string Email;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Easy.Domain.Application;
+using Easy.Log.Application.Models;
 using Easy.Log.Application.Models.Log;
 using Easy.Log.Model;
 using System;
@@ -37,5 +38,33 @@ namespace Easy.Log.Application.Log
             RepositoryRegistry.Log.Remove(log);
         }
 
+        public PageList<LogModel> Select(LogQuery query)
+        {
+            int totalRows = 0;
+            IList<M.Log> list = RepositoryRegistry.Log.Select(new Model.Log.LogQuery
+            {
+                PageIndex = query.PageIndex,
+                PageSize = query.PageSize,
+                AppId=query.AppId,
+                AppName=query.AppName,
+                StartDate=query.StartDate ,
+                EndDate=query.EndDate,
+                LogLevel=query.LogLevel,
+                Tag=query.Tag
+            }, out totalRows);
+            PageList<LogModel> pageList = new PageList<LogModel>();
+            pageList.Collections = list.Select(m=>new LogModel() {
+                AppId = m.AppInfo.AppId,
+                AppName = m.AppInfo.AppName,
+                Ip = m.Ip,
+                CreateDate = m.CreateDate,
+                Message = m.Message,
+                Tag = m.Tag,
+                LogLevel=m.LogLevel.GetHashCode(),
+                Id=m.Id
+            }).ToList();
+            pageList.TotalRows = totalRows;
+            return pageList;
+        }
     }
 }

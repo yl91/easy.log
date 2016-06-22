@@ -159,6 +159,10 @@
     <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\App\Add.cshtml" />
+    <Content Include="Views\App\AddPost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

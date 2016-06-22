@@ -58,6 +58,7 @@
     <Compile Include="Log\Log.cs" />
     <Compile Include="Log\LogBrokenRuleMessage.cs" />
     <Compile Include="Log\LogLevel.cs" />
+    <Compile Include="Log\LogQuery.cs" />
     <Compile Include="Log\LogValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App\App.cs" />

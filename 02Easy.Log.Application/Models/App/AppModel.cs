@@ -8,6 +8,8 @@ namespace Easy.Log.Application.Models.App
 {
     public class AppModel
     {
+        public int Id;
+
         /// <summary>
         /// 名称
         /// </summary>
@@ -33,5 +35,10 @@ namespace Easy.Log.Application.Models.App
         /// 创建时间
         /// </summary>
         public DateTime CreateDate;
+
+        /// <summary>
+        /// ip
+        /// </summary>
+        public string Ip;
     }
 }

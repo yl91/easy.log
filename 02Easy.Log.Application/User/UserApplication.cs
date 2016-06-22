@@ -28,7 +28,8 @@ namespace Easy.Log.Application.User
                 UserName = m.UserName,
                 RealName = m.RealName,
                 CreateDate = m.CreateDate,
-                Password = m.Password
+                Password = m.Password,
+                Email = m.Email
             }).ToList();
             pageList.TotalRows = totalRows;
             return pageList;
@@ -50,10 +51,10 @@ namespace Easy.Log.Application.User
             return new Tuple<int, string>(user.Id, user.Name);
         }
 
-        public string Create(string username,string password,string realname)
+        public string Create(string username,string password,string realname,string email)
         {
             password= new PasswordService().Encrypt(password);
-            M.User user = new M.User(username) { Password=password,RealName=realname};
+            M.User user = new M.User(username,email) { Password=password,RealName=realname};
             if (user.Validate())
             {
                 RepositoryRegistry.User.Add(user);
@@ -62,7 +63,7 @@ namespace Easy.Log.Application.User
             return user.GetBrokenRules()[0].Description;
         }
 
-        public string Update(int userId,string password,string realname)
+        public string Update(int userId,string password,string realname,string email)
         {
             M.User user= RepositoryRegistry.User.FindBy(userId);
             user.Password = password;
@@ -86,7 +87,8 @@ namespace Easy.Log.Application.User
                 RealName = user.RealName,
                 UserName = user.UserName,
                 CreateDate = user.CreateDate,
-                Password=user.Password
+                Password=user.Password,
+                Email=user.Email
             };
         }
 
@@ -98,7 +100,8 @@ namespace Easy.Log.Application.User
                 RealName=m.RealName,
                 UserName=m.UserName,
                 CreateDate=m.CreateDate,
-                Password=m.Password
+                Password=m.Password,
+                Email=m.Email
             }).ToList();
             return new Return() { DataBody=listmodel };
         }

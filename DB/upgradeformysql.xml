@@ -5,13 +5,31 @@
             INSERT INTO db_version(from_version,current_version,last_update_datetime) VALUES({0},{1},now());
         </SettingSql>
     </Settings>
-	
-     <UpgradeSql version="2">
+        <UpgradeSql version="2">
         <Author>杨力</Author>
         <Memo>
-            初始化数据库
+            初始化数据库11
         </Memo>
         <Sql ref="create.sql" />
     </UpgradeSql>
 	
- </DBUpgrade>
+	<UpgradeSql version="3">
+        <Author>杨力</Author>
+        <Memo>
+            log_user表加email字段
+        </Memo>
+		<Sql>
+		alter table log_user add column email VARCHAR(50) default null comment '邮箱';
+        </Sql>
+    </UpgradeSql>
+   
+	<UpgradeSql version="4">
+        <Author>杨力</Author>
+        <Memo>
+            log_app表加ip字段
+        </Memo>
+		<Sql>
+		alter table log_app add column ip VARCHAR(50) default null comment '';
+        </Sql>
+    </UpgradeSql>
+</DBUpgrade>

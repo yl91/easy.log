@@ -15,7 +15,7 @@ namespace Easy.Log.Test.Application.User
         public void CreateTest()
         {
             var user = Create();
-            ApplicationRegistry.User.Create(user.UserName, user.Password, user.RealName);
+            ApplicationRegistry.User.Create(user.UserName, user.Password, user.RealName,"yangli@163.com");
 
             var actual= ApplicationRegistry.User.FindById(user.Id);
         }
@@ -28,7 +28,7 @@ namespace Easy.Log.Test.Application.User
             {
                 user.RealName = "李四";
                 user.Password = "111111";
-                string msg = ApplicationRegistry.User.Update(user.Id, user.Password, user.RealName);
+                string msg = ApplicationRegistry.User.Update(user.Id, user.Password, user.RealName,"yangli@163.com");
             }
         }
 
@@ -47,7 +47,7 @@ namespace Easy.Log.Test.Application.User
 
         public M.User Create()
         {
-            return new M.User("test") { RealName="张三", Password="123456" };
+            return new M.User("test","yangli@163.com") { RealName="张三", Password="123456" };
         }
     }
 }

@@ -72,11 +72,13 @@ namespace Easy.Log.Application.App
         {
             var list = RepositoryRegistry.App.FindAll();
             var listModel = list.Select(m=>new AppModel() {
+                Id=m.Id,
                 UserId=m.UserId,
                 CreateDate=m.CreateDate,
                 Description=m.Description,
                 IsRecord=m.IsRecord,
-                Name=m.Name
+                Name=m.Name,
+                Ip=m.Ip
             }).ToList();
             return new Return() { DataBody=listModel };
         }

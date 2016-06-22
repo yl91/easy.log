@@ -85,7 +85,7 @@ namespace Easy.Log.Test.Repository.User
 
         public static M.User Create()
         {
-            var model= new M.User("sky");
+            var model= new M.User("sky","yangli@163.com");
             model.RealName = "张三";
             model.Password = "abc123";
             return model;

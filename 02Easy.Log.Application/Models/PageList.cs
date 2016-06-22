@@ -20,6 +20,7 @@ namespace Easy.Log.Application.Models
             get;
             set;
         }
+
         /// <summary>
         /// 集合列表
         /// </summary>
