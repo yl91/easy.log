@@ -45,7 +45,7 @@ namespace Easy.Log.Controllers
             var userId = UserSession.UserInfoDetail.Item1;
             
             var content = $"http://{Request.Url.Authority}/Login/Register?userId={userId}&appIds={ids}";
-            var result=SendMail.sendMail("smtp.etao.cn", "yang.li@etao.cn", "yangli123", "易淘_日志中心", "yang.li@etao.cn", email, "主题", "测试:"+ content);
+            var result=SendMail.sendMail("smtp.etao.cn", "yang.li@etao.cn", "yangli123", "易淘_日志中心", "yang.li@etao.cn", email, "主题", "信息来自："+Request.Url.Authority+",测试:"+ content);
 
 
             if (result)
