@@ -5,6 +5,7 @@ using Easy.Log.Application.Models.User;
 using Easy.Log.Utility;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -56,6 +57,8 @@ namespace Easy.Log.Controllers
 
         public ActionResult Immediate(string group)
         {
+            var url= ConfigurationManager.AppSettings["SignalR_Url"].ToString();
+            ViewBag.url = url;
             ViewBag.group = group;
             return View();
         }

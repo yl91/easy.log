@@ -7,10 +7,10 @@
 {
     <script src="~/Scripts/SignalR/jquery.signalR-1.1.4.min.js"></script>
     <script src="~/Scripts/SignalR/json2.js"></script>
-    <script src="http://127.0.0.1:9479/Signalr/Hubs"></script>
+    <script src="@ViewBag.url/Signalr/Hubs"></script>
 
     <script type="text/javascript">
-        $.connection.hub.url = "http://127.0.0.1:9479/signalr";
+        $.connection.hub.url = "@ViewBag.url/signalr";
         var pushHub = $.connection.pushHub;
         $.connection.hub.start({ xdomain: true }).done(function(){
             var html = "<div class=\"alert alert-success\" role=\"alert\">连接成功</div>";
