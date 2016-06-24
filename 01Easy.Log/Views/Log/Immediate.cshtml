@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Immediate";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+@section scripts
+{
+    <script src="~/Scripts/SignalR/jquery.signalR-1.1.4.min.js"></script>
+    <script src="~/Scripts/SignalR/json2.js"></script>
+    <script src="http://127.0.0.1:9479/Signalr/Hubs"></script>
+
+    <script type="text/javascript">
+        $.connection.hub.url = "http://127.0.0.1:9479/signalr";
+        var pushHub = $.connection.pushHub;
+        $.connection.hub.start({ xdomain: true }).done(function(){
+            var html = "<div class=\"alert alert-success\" role=\"alert\">连接成功</div>";
+            $("#message").prepend(html);
+        });
+
+        $.connection.hub.qs = { username: '@Easy.Log.Utility.UserSession.UserInfoDetail.Item2', groupname: '@ViewBag.group' }
+
+        pushHub.client.notice = function (message) {
+            var html = "<div class=\"alert alert-success\" role=\"alert\">" + message + "</div>";
+            $("#message").prepend(html);
+        };
+
+
+        pushHub.client.addMessage = function (type, message) {
+            color = (type == 3) ? "alert-danger" : "alert-success";
+            var html = "<div class=\"alert "+color+"\" role=\"alert\">" + message + "</div>";
+            $("#message").prepend(html);
+        };
+    </script>
+    
+}
+@section css
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            即时日志
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="\"><i class="fa fa-th"></i> Home</a></li>
+            <li class="active">即时日志</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div id="message"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

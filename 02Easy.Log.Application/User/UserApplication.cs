@@ -20,7 +20,8 @@ namespace Easy.Log.Application.User
                 PageIndex =query.PageIndex,
                 PageSize =query.PageSize,
                 Name =query.Name,
-                CreateDate =query.CreateDate
+                CreateDate =query.CreateDate,
+                UserIds=query.UuserIds
             },out totalRows);
             PageList<UserModel> pageList = new PageList<UserModel>();
             pageList.Collections = list.Select(m => new UserModel() {
@@ -51,16 +52,16 @@ namespace Easy.Log.Application.User
             return new Tuple<int, string>(user.Id, user.Name);
         }
 
-        public string Create(string username,string password,string realname,string email)
+        public UserModel Create(string username,string password,string realname,string email)
         {
             password= new PasswordService().Encrypt(password);
             M.User user = new M.User(username,email) { Password=password,RealName=realname};
             if (user.Validate())
             {
                 RepositoryRegistry.User.Add(user);
-                return string.Empty;
+                return new UserModel() { Id = user.Id, CreateDate = user.CreateDate, Email = user.Email, Password = user.Password, RealName = user.RealName, UserName = username };
             }
-            return user.GetBrokenRules()[0].Description;
+            return null;
         }
 
         public string Update(int userId,string password,string realname,string email)

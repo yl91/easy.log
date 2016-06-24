@@ -32,4 +32,14 @@
 		alter table log_app add column ip VARCHAR(50) default null comment '';
         </Sql>
     </UpgradeSql>
+	
+	<UpgradeSql version="5">
+        <Author>杨力</Author>
+        <Memo>
+            log_relation表加email字段
+        </Memo>
+		<Sql>
+		alter table log_relation add column email VARCHAR(50) default null comment '';
+        </Sql>
+    </UpgradeSql>
 </DBUpgrade>

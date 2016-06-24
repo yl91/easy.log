@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Easy.Public;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using M=Easy.Log.Model.Relation;
+using M = Easy.Log.Model.Relation;
 
 namespace Easy.Log.Infrastructure.Repository.Relation
 {
@@ -11,7 +12,7 @@ namespace Easy.Log.Infrastructure.Repository.Relation
     {
         private static string BaseSelectSql()
         {
-            return @"SELECT id, userid, inviteuserid, appid, isaccept, createdate FROM log_relation";
+            return @"SELECT id, userid, inviteuserid, appid, isaccept, createdate,email FROM log_relation";
         }
 
 
@@ -21,11 +22,28 @@ namespace Easy.Log.Infrastructure.Repository.Relation
             return string.Join("", BaseSelectSql(), " order by id desc ");
         }
 
+        public static Tuple<string,dynamic> FindInviteAll(int inviteUserId,int appId,int userId)
+        {
+            var builder = new SQLBuilder();
+            builder.AppendWhere();
+            builder.Append(inviteUserId > 0, "and", "inviteuserid=@InviteUserId");
+            builder.Append(appId>0,"and", "appid=@AppId");
+            builder.Append(userId > 0, "and", "userid=@UserId");
+
+            string sql = string.Join(" ", BaseSelectSql(), builder.Sql(), "order by id desc");
+
+            return new Tuple<string, dynamic>(sql,new {
+                InviteUserId=inviteUserId,
+                AppId=appId,
+                UserId=userId
+            });
+        }
+
         public static Tuple<string, dynamic> Add(M.UserRelation userRelation)
         {
             const string sql = @"INSERT INTO log_relation
-	                            (userid, inviteuserid, appid, isaccept, createdate)
-	                            VALUES (@UserId, @Inviteuserid , @AppId, @IsAccept, @CreateDate);select last_insert_id()";
+	                            (userid, inviteuserid, appid, isaccept, createdate,email)
+	                            VALUES (@UserId, @Inviteuserid , @AppId, @IsAccept, @CreateDate,@Email);select last_insert_id()";
 
             return new Tuple<string, dynamic>(sql, new
             {
@@ -33,8 +51,17 @@ namespace Easy.Log.Infrastructure.Repository.Relation
                 Inviteuserid = userRelation.InviteUserId,
                 AppId = userRelation.AppId,
                 IsAccept = userRelation.IsAccept,
-                CreateDate=userRelation.CreateDate
+                CreateDate=userRelation.CreateDate,
+                Email=userRelation.Email
             });
+        }
+
+        public static string FindPendingInvite(int inviteUserId)
+        {
+            SQLBuilder builder = new SQLBuilder();
+            builder.AppendWhere();
+            builder.Append(inviteUserId > 0, "and", "inviteuserid=" + inviteUserId);
+            return string.Join(" ",BaseSelectSql(),builder.Sql());
         }
 
         public static Tuple<string, dynamic> FindBy(int id)
@@ -67,7 +94,8 @@ namespace Easy.Log.Infrastructure.Repository.Relation
 		                            inviteuserid=@InviteUserId,
 		                            appid=@AppId,
 		                            isaccept=@IsAccept,
-		                            createdate=@CreateDate
+		                            createdate=@CreateDate,
+                                    email=@Email
 	                            WHERE id=@Id";
 
             return new Tuple<string, dynamic>(sql, new
@@ -77,7 +105,8 @@ namespace Easy.Log.Infrastructure.Repository.Relation
                 InviteUserId=userRelation.InviteUserId,
                 AppId=userRelation.AppId,
                 IsAccept=userRelation.IsAccept,
-                CreateDate=userRelation.CreateDate
+                CreateDate=userRelation.CreateDate,
+                Email=userRelation.Email
             });
         }
 

@@ -12,5 +12,6 @@ namespace Easy.Log.Application.Models.User
         public DateTime? CreateDate;
         public int PageIndex;
         public int PageSize;
+        public int[] UuserIds;
     }
 }

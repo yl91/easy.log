@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Invite";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    List<Easy.Log.Application.Models.App.AppModel> list = ViewBag.list;
+}
+
+
+@section css
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("input:checkbox").click(function () {
+                var ids = $("input:checkbox checked").val();
+                alert(ids);
+            });
+        });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            开始邀请
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="\"><i class="fa fa-th"></i> Home</a></li>
+            <li class="active">开始邀请</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <form class="form-inline " action="@Url.Action("SendPost")">
+                        <div class="center">
+                            @foreach (var item in list)
+                            {
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="inlineCheckbox1" value="@item.Id"> @item.Name
+                                </label>
+                            }
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" name="email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send invitation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

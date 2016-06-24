@@ -103,6 +103,7 @@ namespace Easy.Log.Infrastructure.Repository.User
             build.AppendWhere();
             build.Append(!string.IsNullOrEmpty(query.Name), "and", $"username like '%{query.Name}%'");
             build.Append(query.CreateDate != null, "and", "createdate>=@CreateDate");
+            build.Append(query.UserIds!=null&&query.UserIds.Length>0,"and",$"id in({string.Join(",",query.UserIds)})");
             return build.Sql();
         }
     }

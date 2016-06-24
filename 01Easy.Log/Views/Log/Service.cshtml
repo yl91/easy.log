@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Service";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    List<Easy.Log.Application.Models.App.AppModel> list = ViewBag.list;
+}
+ 
+@section css
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            选择服务
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="\"><i class="fa fa-th"></i> Home</a></li>
+            <li class="active">选择服务</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="list-group">
+                        @foreach (var item in list)
+                        {
+                            <a href="@Url.Action("Immediate",new { group=item.Name})" class="list-group-item">@item.Name</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

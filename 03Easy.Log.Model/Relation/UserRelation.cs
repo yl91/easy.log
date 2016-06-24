@@ -68,6 +68,10 @@ namespace Easy.Log.Model.Relation
         {
             get; private set;
         }
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Email { get; set; }
 
         public override bool Validate()
         {

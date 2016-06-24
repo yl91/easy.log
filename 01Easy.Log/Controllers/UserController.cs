@@ -24,21 +24,20 @@ namespace Easy.Log.Controllers
 
         public PageList<UserModel> Select(int pageIndex,int pageSize,string name="",DateTime? createDate=null)
         {
+            var userId = UserSession.UserInfoDetail.Item1;
+
+            int[] userIds = new int[] { };
+            if (userId>0)
+            {
+                userIds = ApplicationRegistry.Relation.GetGroupUserIds(userId);
+            }
             PageList<UserModel> pageList= ApplicationRegistry.User.Select(new UserQuery() {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
                 Name = name,
-                CreateDate = createDate
+                CreateDate = createDate,
+                UuserIds=userIds
             });
-
-            var userId = UserSession.UserInfoDetail.Item1;
-            if (userId==0) //管理员
-            {
-                return pageList;
-            }
-
-            pageList.Collections = pageList.Collections.Where(p => p.Id == userId).ToList();
-            pageList.TotalRows = pageList.Collections.Count();
             return pageList;
         }
 
@@ -53,14 +52,14 @@ namespace Easy.Log.Controllers
         [HttpPost]
         public ActionResult AddPost(string userName, string password, string realName, string email)
         {
-            var r= ApplicationRegistry.User.Create(userName, password, realName, email);
-            if (string.IsNullOrEmpty(r))
+            var user= ApplicationRegistry.User.Create(userName, password, realName, email);
+            if (user!=null)
             {
                 ViewBag.Ok = "ok";
             }
             else
             {
-                ViewBag.Ok = r;
+                ViewBag.Ok = "no";
             }
             return View();
         }

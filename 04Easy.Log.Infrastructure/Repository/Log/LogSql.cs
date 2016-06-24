@@ -114,6 +114,7 @@ namespace Easy.Log.Infrastructure.Repository.Log
             build.Append(query.EndDate != null, "and", "createdate<=@EndDate");
             build.Append(!string.IsNullOrEmpty(query.Tag), "and", $"tag like '%{query.Tag}%' ");
             build.Append(query.LogLevel > 0, "and", "loglevel=@LogLevel");
+            build.Append(query.AppIds != null && query.AppIds.Length > 0, "and", $"appid in ({string.Join(",",query.AppIds)})");
             return build.Sql();
         }
     }

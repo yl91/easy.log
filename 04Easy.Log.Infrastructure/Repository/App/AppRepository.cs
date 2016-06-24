@@ -41,6 +41,15 @@ namespace Easy.Log.Infrastructure.Repository.App
             }
         }
 
+        public IList<M.App> GetGroupApp(int userId, Dictionary<int, int> invitedDic)
+        {
+            using (var conn = Database.Open())
+            {
+                 var sql= AppSql.GetGroupApp(userId,invitedDic);
+                return conn.Query<M.App>(sql).ToArray();
+            }
+        }
+
         public void Remove(Model.App.App item)
         {
             using (var conn=Database.Open())
@@ -69,3 +78,4 @@ namespace Easy.Log.Infrastructure.Repository.App
         }
     }
 }
+

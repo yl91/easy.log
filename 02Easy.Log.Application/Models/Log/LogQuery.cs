@@ -24,5 +24,9 @@ namespace Easy.Log.Application.Models.Log
         public int PageIndex;
 
         public int PageSize;
+
+        public int[] AppIds;
+
+        public int UserId;
     }
 }

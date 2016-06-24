@@ -24,6 +24,8 @@ namespace Easy.Log.Model.Log
 
         public int PageSize;
 
+        public int[] AppIds;
+
         public Int32 Limit
         {
             get

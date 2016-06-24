@@ -46,12 +46,18 @@ namespace Easy.Log.Controllers
         }
 
         [HttpPost]
-        public ActionResult RegisterPost(string userName, string password, string realName, string email)
+        public ActionResult RegisterPost(string userName, string password, string realName, string email,int userId,string appIds)
         {
-            string msg = ApplicationRegistry.User.Create(userName, password, realName, email);
-            if (string.IsNullOrEmpty(msg))
+            var user= ApplicationRegistry.User.Create(userName, password, realName, email);
+            if (user!=null)
             {
-                AuthenticateHelper.SetTicket(userName, null, 0, realName);
+                string[] ids = appIds.Split(new char[] { ','}, StringSplitOptions.None);
+                ids.AsParallel().ForAll((m) => {
+                    ApplicationRegistry.Relation.Create(userId, user.Id, int.Parse(m));
+                });
+                
+
+                AuthenticateHelper.SetTicket(user.Id.ToString(), null, 0, realName);
                 return Redirect("/Home/Index");
             }
             return Json("no");

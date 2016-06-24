@@ -14,7 +14,7 @@ namespace Easy.Log.Application.User
             var user= RepositoryRegistry.User.FindBy(userName);
             if (user==null&&userName=="admin"&&password=="100001")
             {
-                return new UserDescriptor(0, "管理员");
+                return new UserDescriptor(0, "admin");
             }
             if (user==null)
             {

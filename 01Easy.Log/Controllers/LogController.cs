@@ -45,21 +45,32 @@ namespace Easy.Log.Controllers
 
         public PageList<LogModel> Select(int pageIndex, int pageSize)
         {
+            var userId = UserSession.UserInfoDetail.Item1;
             PageList<LogModel> pageList = ApplicationRegistry.Log.Select(new LogQuery() {
                 PageIndex=pageIndex,
-                PageSize=pageSize
+                PageSize=pageSize,
+                UserId=userId
             });
-            var userId = UserSession.UserInfoDetail.Item1;
-            if (userId == 0) //管理员
-            {
-                return pageList;
-            }
-
-            pageList.Collections = pageList.Collections.Where(p => p.Id == userId).ToList();
-            pageList.TotalRows = pageList.Collections.Count();
-
-            
             return pageList;
+        }
+
+        public ActionResult Immediate(string group)
+        {
+            ViewBag.group = group;
+            return View();
+        }
+
+        /// <summary>
+        /// 服务列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Service()
+        {
+            var userId = UserSession.UserInfoDetail.Item1;
+            var result = new Return();
+            result=ApplicationRegistry.App.GetGroupApp(userId);
+            ViewBag.list = result.DataBody;
+            return View();
         }
     }
 }

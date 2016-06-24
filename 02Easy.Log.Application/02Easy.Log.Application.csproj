@@ -65,6 +65,7 @@
     <Compile Include="Models\Log\LogParameter.cs" />
     <Compile Include="Models\Log\LogQuery.cs" />
     <Compile Include="Models\PageList.cs" />
+    <Compile Include="Models\Relation\UserRelationModel.cs" />
     <Compile Include="Models\Return.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Models\User\UserQuery.cs" />

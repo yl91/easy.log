@@ -32,6 +32,24 @@ namespace Easy.Log.Infrastructure.Repository.Relation
             }
         }
 
+        public IList<UserRelation> FindInviteAll(int inviteUserId,int appId,int userId)
+        {
+            using (var conn=Database.Open())
+            {
+                var tuple = UserRelationSql.FindInviteAll(inviteUserId, appId,userId);
+                return conn.Query<UserRelation>(tuple.Item1, (object)tuple.Item2).ToArray();
+            }
+        }
+
+        public IList<UserRelation> FindPendingInvite(int inviteUserId)
+        {
+            using (var conn=Database.Open())
+            {
+                var sql = UserRelationSql.FindPendingInvite(inviteUserId);
+                return conn.Query<UserRelation>(sql).ToArray();
+            }
+        }
+
         public UserRelation FindBy(int key)
         {
             using (var conn=Database.Open())

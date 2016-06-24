@@ -17,12 +17,7 @@ namespace Easy.Log.Controllers
         // GET: App
         public ActionResult Index()
         {
-            var list = List();
-            if (UserSession.UserInfoDetail.Item1>0)
-            {
-                list = List().Where(p => p.UserId == UserSession.UserInfoDetail.Item1).ToList();
-            }
-            ViewBag.list = list;
+            ViewBag.list = List();
             return View();
         }
 
@@ -35,7 +30,8 @@ namespace Easy.Log.Controllers
 
         public List<AppModel> List()
         {
-            Return @return=ApplicationRegistry.App.FindAll();
+            var userId = UserSession.UserInfoDetail.Item1;
+            Return @return= ApplicationRegistry.App.GetGroupApp(userId);
             return (List<AppModel>)@return.DataBody;
         }
 

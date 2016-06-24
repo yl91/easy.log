@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Easy.Public;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using M=Easy.Log.Model.App;
+using M = Easy.Log.Model.App;
 
 namespace Easy.Log.Infrastructure.Repository.App
 {
@@ -13,8 +14,6 @@ namespace Easy.Log.Infrastructure.Repository.App
         {
             return @"SELECT id,name, description, userid, isrecord, createdate,ip FROM log_app";
         }
-
-
 
         public static string FindAll()
         {
@@ -47,6 +46,22 @@ namespace Easy.Log.Infrastructure.Repository.App
         public static string Remove(int id)
         {
             return string.Concat(RemoveAll(), " where id=" + id);
+        }
+
+        public static string GetGroupApp(int userId, Dictionary<int, int> invitedDic)
+        {
+            
+            string orsql = string.Empty;
+            foreach (var item in invitedDic)
+            {
+                orsql+= $" or (id={item.Key} and userid={item.Value}) ";
+            }
+            var build = new SQLBuilder();
+            build.AppendWhere();
+            build.Append(userId > 0, "and", $"userid={userId}");
+            build.Append(invitedDic != null && invitedDic.Count > 0, " ",orsql);
+
+            return string.Join(" ", BaseSelectSql(),build.Sql(), " order by id desc  ");
         }
 
         public static string RemoveAll()
