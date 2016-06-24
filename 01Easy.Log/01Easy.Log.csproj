@@ -330,6 +330,7 @@
     <Content Include="Views\Relation\Manage.cshtml" />
     <Content Include="Views\Relation\Invite.cshtml" />
     <Content Include="Views\Relation\SendPost.cshtml" />
+    <Content Include="Views\Relation\AgreePost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

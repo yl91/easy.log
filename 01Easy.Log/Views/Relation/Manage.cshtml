@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Manage";
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    List<Easy.Log.Application.Models.Relation.UserRelationModel> list = ViewBag.list;
+    List<Easy.Log.Application.Models.Relation.PendingUserRelationModel> list = ViewBag.list;
 }
 
 @section css
@@ -59,17 +59,24 @@
                                                 </th>
                                         </thead>
                                         <tbody>
-                                            <tr role="row" >
+                                            
                                                 @foreach (var item in list)
                                                 {
-                                                    <td >@item.UserId</td>
-                                                    <td>@item.AppId</td>
-                                                    <td>@item.IsAccept</td>
-                                                    <td>@item.CreateDate</td>
-                                                    <td><a class="btn btn-default" href="#" role="button">同意</a></td>
+                                                    <tr role="row">
+                                                        <td>@item.InvietUserName</td>
+                                                        <td>@item.AppName</td>
+                                                        <td>@item.IsAccept</td>
+                                                        <td>@item.CreateDate</td>
+                                                        @if (!item.IsAccept)
+                                                        {
+                                                        <td><a class="btn btn-default" href="@Url.Action("AgreePost",new { id=item.Id })" role="button">同意</a></td>
+                                                        }
+                                                        else
+                                                        {
+                                                        <td></td>
+                                                        }
+                                                    </tr>
                                                 }
-                                                
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

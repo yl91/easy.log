@@ -40,8 +40,10 @@ namespace Easy.Log.Controllers
             return Redirect("/login/index");
         }
 
-        public ActionResult Register()
+        public ActionResult Register(int userId=0,string appIds="")
         {
+            ViewBag.userId = userId;
+            ViewBag.appIds = appIds;
             return View();
         }
 
@@ -51,12 +53,13 @@ namespace Easy.Log.Controllers
             var user= ApplicationRegistry.User.Create(userName, password, realName, email);
             if (user!=null)
             {
-                string[] ids = appIds.Split(new char[] { ','}, StringSplitOptions.None);
-                ids.AsParallel().ForAll((m) => {
-                    ApplicationRegistry.Relation.Create(userId, user.Id, int.Parse(m));
-                });
-                
-
+                if (userId>0&&!string.IsNullOrEmpty(appIds))
+                {
+                    string[] ids = appIds.Split(new char[] { ',' }, StringSplitOptions.None);
+                    ids.AsParallel().ForAll((m) => {
+                        ApplicationRegistry.Relation.Create(userId, user.Id, int.Parse(m));
+                    });
+                }
                 AuthenticateHelper.SetTicket(user.Id.ToString(), null, 0, realName);
                 return Redirect("/Home/Index");
             }

@@ -35,6 +35,18 @@ namespace Easy.Log.Application.Relation
             return null;
         }
 
+        public string AgreeInvite(int id)
+        {
+            M.UserRelation relation= RepositoryRegistry.UserRelation.FindBy(id);
+            relation.IsAccept = true;
+            if (relation.Validate())
+            {
+                RepositoryRegistry.UserRelation.Update(relation);
+                return string.Empty;
+            }
+            return relation.GetBrokenRules()[0].Description;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,7 +61,16 @@ namespace Easy.Log.Application.Relation
         {
             IList<M.UserRelation> list= RepositoryRegistry.UserRelation.FindPendingInvite(inviteUserId);
 
-            return new Return() { DataBody=list.Select(m=>new PendingUserRelationModel() { Id=m.Id,CreateDate=m.CreateDate,AppName="", IsAccept=m.IsAccept, InvietUserName="" }).ToList() };
+            return new Return() {
+                DataBody = list.Select(m => new PendingUserRelationModel()
+                {
+                    Id = m.Id,
+                    CreateDate = m.CreateDate,
+                    AppName = RepositoryRegistry.App.FindBy(m.AppId) == null ? "" : RepositoryRegistry.App.FindBy(m.AppId).Name,
+                    IsAccept = m.IsAccept,
+                    InvietUserName = RepositoryRegistry.User.FindBy(m.UserId) == null?"" : RepositoryRegistry.User.FindBy(m.UserId).UserName
+                }).ToList()
+            };
         }
 
         /// <summary>

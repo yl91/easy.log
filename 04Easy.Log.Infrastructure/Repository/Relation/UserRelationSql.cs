@@ -29,6 +29,7 @@ namespace Easy.Log.Infrastructure.Repository.Relation
             builder.Append(inviteUserId > 0, "and", "inviteuserid=@InviteUserId");
             builder.Append(appId>0,"and", "appid=@AppId");
             builder.Append(userId > 0, "and", "userid=@UserId");
+            builder.Append(true, "and", "isaccept=1");
 
             string sql = string.Join(" ", BaseSelectSql(), builder.Sql(), "order by id desc");
 
