@@ -16,6 +16,7 @@ namespace Easy.Log.Controllers
     {
         public ActionResult Manage()
         {
+
             var result= ApplicationRegistry.Relation.FindPendingInvite(UserSession.UserInfoDetail.Item1);
 
             ViewBag.list = (List<PendingUserRelationModel>)result.DataBody;
@@ -42,7 +43,8 @@ namespace Easy.Log.Controllers
         public ActionResult SendPost(string email,string ids)
         {
             var userId = UserSession.UserInfoDetail.Item1;
-            var content = $"http://localhost:37477/Login/Register?userId={userId}&appIds={ids}";
+            
+            var content = $"http://{Request.Url.Authority}/Login/Register?userId={userId}&appIds={ids}";
             var result=SendMail.sendMail("smtp.etao.cn", "yang.li@etao.cn", "yangli123", "易淘_日志中心", "yang.li@etao.cn", email, "主题", "测试:"+ content);
 
 
