@@ -49,7 +49,7 @@ namespace Easy.Log.Application.Relation
         {
             IList<M.UserRelation> list= RepositoryRegistry.UserRelation.FindPendingInvite(inviteUserId);
 
-            return new Return() { DataBody=list.Select(m=>new UserRelationModel() { Id=m.Id, AppId=m.AppId, CreateDate=m.CreateDate, InviteUserId= m.InviteUserId, IsAccept=m.IsAccept, UserId=m.UserId }).ToList() };
+            return new Return() { DataBody=list.Select(m=>new PendingUserRelationModel() { Id=m.Id,CreateDate=m.CreateDate,AppName="", IsAccept=m.IsAccept, InvietUserName="" }).ToList() };
         }
 
         /// <summary>

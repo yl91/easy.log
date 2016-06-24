@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Manage";
     Layout = "~/Views/Shared/MainLayout.cshtml";
-    
+    List<Easy.Log.Application.Models.Relation.UserRelationModel> list = ViewBag.list;
 }
 
 @section css
@@ -43,22 +43,33 @@
                                         <thead>
                                             <tr role="row">
                                                 <th class="_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 245px;">
-                                                    ID
+                                                    邀请人
                                                 </th>
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 301px;">
-                                                    用户名
+                                                    应用
                                                 </th>
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 266px;">
-                                                    真实姓名
+                                                    是否同意
                                                 </th>
                                                 <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 266px;">
-                                                    邮箱
+                                                    时间
                                                 </th>
-                                                <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 213px;">
-                                                    创建时间
+                                                <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 266px;">
+                                                    操作
                                                 </th>
                                         </thead>
                                         <tbody>
+                                            <tr role="row" >
+                                                @foreach (var item in list)
+                                                {
+                                                    <td >@item.UserId</td>
+                                                    <td>@item.AppId</td>
+                                                    <td>@item.IsAccept</td>
+                                                    <td>@item.CreateDate</td>
+                                                    <td><a class="btn btn-default" href="#" role="button">同意</a></td>
+                                                }
+                                                
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
