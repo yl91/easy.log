@@ -14,7 +14,7 @@
         $.connection.hub.url = "@ViewBag.url/signalr";
         var pushHub = $.connection.pushHub;
         $.connection.hub.logging = true;
-        $.connection.hub.start({ xdomain: true, transport: ['longPolling'] }).done(function () {
+        $.connection.hub.start({ xdomain: true, transport: ['longPolling','webSockets'] }).done(function () {
             var html = "<div class=\"alert alert-success\" role=\"alert\">连接成功</div>";
             $("#message").prepend(html);
         }).fail(function () { console.log("Could not Connect!"); });;
