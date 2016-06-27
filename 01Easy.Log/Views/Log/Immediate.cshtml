@@ -10,13 +10,14 @@
     <script src="@ViewBag.url/Signalr/Hubs"></script>
 
     <script type="text/javascript">
-        //test
+        //test  'longPolling'
         $.connection.hub.url = "@ViewBag.url/signalr";
         var pushHub = $.connection.pushHub;
-        $.connection.hub.start({ xdomain: true, transport: ['webSockets', 'longPolling'] }).done(function () {
+        $.connection.hub.logging = true;
+        $.connection.hub.start({ xdomain: true, transport: ['webSockets'] }).done(function () {
             var html = "<div class=\"alert alert-success\" role=\"alert\">连接成功</div>";
             $("#message").prepend(html);
-        });
+        }).fail(function () { console.log("Could not Connect!"); });;
 
         $.connection.hub.qs = { username: '@Easy.Log.Utility.UserSession.UserInfoDetail.Item2', groupname: '@ViewBag.group' }
 
