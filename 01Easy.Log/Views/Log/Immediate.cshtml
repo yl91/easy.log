@@ -13,7 +13,7 @@
         //test
         $.connection.hub.url = "@ViewBag.url/signalr";
         var pushHub = $.connection.pushHub;
-        $.connection.hub.start({ xdomain: true, transport: ['webSockets'] }).done(function () {
+        $.connection.hub.start({ xdomain: true, transport: ['webSockets', 'longPolling'] }).done(function () {
             var html = "<div class=\"alert alert-success\" role=\"alert\">连接成功</div>";
             $("#message").prepend(html);
         });
