@@ -10,6 +10,7 @@
     <script src="@ViewBag.url/Signalr/Hubs"></script>
 
     <script type="text/javascript">
+        //test
         $.connection.hub.url = "@ViewBag.url/signalr";
         var pushHub = $.connection.pushHub;
         $.connection.hub.start({ xdomain: true, transport: ['webSockets'] }).done(function () {
