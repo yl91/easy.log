@@ -25,11 +25,11 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box">
+                <div class="box"> 
                     <div class="list-group">
                         @foreach (var item in list)
                         {
-                            <a href="@Url.Action("Immediate",new { group=item.Name})" class="list-group-item">@item.Name</a>
+                            <a href="@Url.Action("Immediate",new { appId = item.Id})" class="list-group-item">@item.Name</a>
                         }
                     </div>
                 </div>

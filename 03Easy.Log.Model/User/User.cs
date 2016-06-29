@@ -18,6 +18,7 @@ namespace Easy.Log.Model.User
             this.UserName = userName;
             this.Email = email;
             this.CreateDate = DateTime.Now;
+            this.Secret = Guid.NewGuid().ToString("N");
         }
 
         /// <summary>
@@ -56,6 +57,12 @@ namespace Easy.Log.Model.User
         }
 
         public string Email
+        {
+            get;
+            private set;
+        }
+
+        public string Secret
         {
             get;
             private set;

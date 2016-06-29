@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Invite";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+    List<Easy.Log.Application.Models.App.AppModel> list = ViewBag.list;
+}
+
+
+@section css
+{
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script type="text/javascript">
+            $(function () {
+                $('#send').on('click', function (a) {
+                    var list = $("input:checkbox:checked");
+                    var ids=[];
+                    for (var i = 0; i < list.length; i++) {
+                        ids.push($(list[i]).val());
+                    }
+
+                    var idstring = ids.join(',');
+                    $('#ids').val(idstring);
+                });
+            });
+    </script>
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            绑定
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="\"><i class="fa fa-th"></i> Home</a></li>
+            <li class="active">开始邀请</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <form class="form-inline " action="@Url.Action("BindPost")" id="form">
+                        <div class="center">
+                            @foreach (var item in list)
+                            {
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="@item.Id"> @item.Name
+                                </label>
+                            }
+                        </div>
+                        <input type="hidden" id="ids" name="ids">
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">用户名</label>
+                            <input type="text" class="form-control" id="exampleInputEmail2" name="username">
+                        </div>
+                        <button id="send" class="btn btn-primary">绑定</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

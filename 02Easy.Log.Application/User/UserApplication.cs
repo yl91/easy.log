@@ -30,7 +30,8 @@ namespace Easy.Log.Application.User
                 RealName = m.RealName,
                 CreateDate = m.CreateDate,
                 Password = m.Password,
-                Email = m.Email
+                Email = m.Email,
+                Secret=m.Secret
             }).ToList();
             pageList.TotalRows = totalRows;
             return pageList;
@@ -89,7 +90,25 @@ namespace Easy.Log.Application.User
                 UserName = user.UserName,
                 CreateDate = user.CreateDate,
                 Password=user.Password,
-                Email=user.Email
+                Email=user.Email,
+                Secret=user.Secret
+            };
+        }
+
+        public UserModel FindByName(string name)
+        {
+            M.User user = RepositoryRegistry.User.FindBy(name);
+            if (user == null)
+                return null;
+            return new UserModel()
+            {
+                Id = user.Id,
+                RealName = user.RealName,
+                UserName = user.UserName,
+                CreateDate = user.CreateDate,
+                Password = user.Password,
+                Email = user.Email,
+                Secret=user.Secret
             };
         }
 
@@ -102,7 +121,8 @@ namespace Easy.Log.Application.User
                 UserName=m.UserName,
                 CreateDate=m.CreateDate,
                 Password=m.Password,
-                Email=m.Email
+                Email=m.Email,
+                Secret=m.Secret
             }).ToList();
             return new Return() { DataBody=listmodel };
         }

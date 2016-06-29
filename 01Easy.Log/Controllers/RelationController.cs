@@ -40,6 +40,23 @@ namespace Easy.Log.Controllers
             return View();
         }
 
+        public ActionResult Bind()
+        {
+            var userId = UserSession.UserInfoDetail.Item1;
+            Return @return = ApplicationRegistry.App.FindAll();
+            if (@return.DataBody == null)
+            {
+                ViewBag.list = null;
+            }
+            else
+            {
+                List<AppModel> list = (List<AppModel>)@return.DataBody;
+                ViewBag.list = list.Where(m => m.UserId == userId).ToList();
+            }
+            return View();
+        }
+
+
         public ActionResult SendPost(string email,string ids)
         {
             var userId = UserSession.UserInfoDetail.Item1;
@@ -75,6 +92,22 @@ namespace Easy.Log.Controllers
             return View();
         }
 
-
+        public ActionResult BindPost(string username, string ids)
+        {
+            var userId = UserSession.UserInfoDetail.Item1;
+            var user= ApplicationRegistry.User.FindByName(username);
+            if (user==null||string.IsNullOrEmpty(ids))
+            {
+                ViewBag.Ok = "no";
+                return View();
+            }
+            string[] array = ids.Split(new char[] { ','}, StringSplitOptions.None);
+            foreach (var item in array)
+            {
+                ApplicationRegistry.Relation.Create(userId, user.Id, int.Parse(item));
+            }
+            ViewBag.Ok = "ok";
+            return View();
+        }
     }
 }

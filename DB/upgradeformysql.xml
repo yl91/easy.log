@@ -42,4 +42,14 @@
 		alter table log_relation add column email VARCHAR(50) default null comment '';
         </Sql>
     </UpgradeSql>
+	
+	<UpgradeSql version="6">
+        <Author>杨力</Author>
+        <Memo>
+            log_user表增加secret
+        </Memo>
+		<Sql>
+		alter table log_user add column secret VARCHAR(50) default null comment '秘钥';
+        </Sql>
+    </UpgradeSql>
 </DBUpgrade>

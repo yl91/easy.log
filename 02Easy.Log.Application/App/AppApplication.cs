@@ -85,7 +85,6 @@ namespace Easy.Log.Application.App
             return new Return() { DataBody = listModel };
         }
 
-
         public Return GetGroupApp(int inviteUserId)
         {
             if (inviteUserId==0)
@@ -114,7 +113,6 @@ namespace Easy.Log.Application.App
                 Ip = m.Ip
             }).ToList()}; 
         }
-
 
         //public Return FindInviteAll(int userId=0)
         //{

@@ -25,7 +25,6 @@ namespace Easy.Log.Controllers
         public PageList<UserModel> Select(int pageIndex,int pageSize,string name="",DateTime? createDate=null)
         {
             var userId = UserSession.UserInfoDetail.Item1;
-
             int[] userIds = new int[] { };
             if (userId>0)
             {

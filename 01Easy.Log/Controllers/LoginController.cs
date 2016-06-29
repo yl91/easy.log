@@ -60,7 +60,7 @@ namespace Easy.Log.Controllers
                         ApplicationRegistry.Relation.Create(userId, user.Id, int.Parse(m));
                     });
                 }
-                AuthenticateHelper.SetTicket(user.Id.ToString(), null, 0, realName);
+                AuthenticateHelper.SetTicket(user.Id.ToString(), null, 0, userName);
                 return Redirect("/Home/Index");
             }
             return Json("no");

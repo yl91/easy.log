@@ -55,9 +55,13 @@ namespace Easy.Log.Controllers
             return pageList;
         }
 
-        public ActionResult Immediate(string group)
+        public ActionResult Immediate(int appId)
         {
             var url= ConfigurationManager.AppSettings["SignalR_Url"].ToString();
+            var app= ApplicationRegistry.App.FindById(appId);
+            var user =ApplicationRegistry.User.FindById(app.UserId);
+            var group = $"{user.Secret}_{app.Name}";
+
             ViewBag.url = url;
             ViewBag.group = group;
             return View();
