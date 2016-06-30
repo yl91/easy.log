@@ -110,7 +110,7 @@ namespace Easy.Log.Application.App
                 Description = m.Description,
                 IsRecord = m.IsRecord,
                 Name = m.Name,
-                Ip = m.Ip
+                Ip = m.Ip,
             }).ToList()}; 
         }
 

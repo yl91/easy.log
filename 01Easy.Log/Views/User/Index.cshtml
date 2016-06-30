@@ -58,6 +58,9 @@
                                             <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 213px;">
                                                 创建时间
                                             </th>
+                                            <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 213px;">
+                                                秘钥
+                                            </th>
                                         </thead>
                                         <tbody>
                                             @foreach (var item in page.Collections)
@@ -68,6 +71,7 @@
                                                     <td>@item.RealName</td>
                                                     <td>@item.Email</td>
                                                     <td>@item.CreateDate</td>
+                                                    <td>@item.Secret</td>
                                                 </tr>
                                             }
 
